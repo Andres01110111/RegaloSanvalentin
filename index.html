@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para: Tu ✨</title>
+    <title>Para Ti ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@300;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --sakura-pink: #ffb7c5;
-            --heart-red: #ff4d6d;
+            --sakura: #ffc2d1;
+            --heart-red: #ff3366;
+            --bg-dark: #0a050a;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle at center, #1a0a10 0%, #050205 100%);
+            background: radial-gradient(circle at center, #1a0a10 0%, #000000 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,71 +26,100 @@
             color: white;
         }
 
-        /* Corazones palpitantes asíncronos en el fondo */
+        /* Corazones de fondo parpadeantes */
         .bg-heart {
             position: absolute;
             color: var(--heart-red);
+            font-size: 20px;
             opacity: 0;
             filter: blur(1px);
-            animation: pulse-random var(--d) infinite ease-in-out;
-            pointer-events: none;
+            animation: pulse-async var(--duration) infinite ease-in-out;
+            animation-delay: var(--delay);
             z-index: 1;
         }
 
-        @keyframes pulse-random {
-            0%, 100% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.2); opacity: 0.4; filter: drop-shadow(0 0 10px var(--heart-red)); }
+        @keyframes pulse-async {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.3); opacity: 0.6; text-shadow: 0 0 15px var(--heart-red); }
+            100% { transform: scale(0.8); opacity: 0; }
         }
 
-        /* Tarjeta principal */
+        /* Tarjeta de Cristal */
         .glass-card {
             position: relative;
             z-index: 10;
             width: 85%;
-            max-width: 450px;
-            padding: 35px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
+            max-width: 480px;
+            padding: 40px 30px;
+            background: rgba(20, 20, 20, 0.6); /* Un poco más oscura para contraste */
+            backdrop-filter: blur(12px);
             border-radius: 25px;
-            border: 1px solid rgba(255, 183, 197, 0.2);
+            border: 1px solid rgba(255, 51, 102, 0.3);
             text-align: center;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 50px rgba(255, 0, 50, 0.2);
+            transition: border-color 0.5s;
         }
 
-        .main-icon {
+        /* Icono Sakura */
+        .sakura-icon {
             font-size: 50px;
             margin-bottom: 20px;
             display: inline-block;
-            animation: floating 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px var(--sakura));
+            animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes floating {
+        @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
 
+        /* Texto Principal */
         #writer {
             font-size: 1.1rem;
-            line-height: 1.7;
+            line-height: 1.6;
             font-weight: 300;
-            min-height: 180px;
+            min-height: 150px;
+            margin-bottom: 20px;
         }
 
+        /* Firma */
         .signature {
-            margin-top: 25px;
-            font-style: italic;
-            color: var(--sakura-pink);
+            font-size: 1rem;
             opacity: 0;
-            transition: opacity 1s ease;
+            color: var(--sakura);
+            margin-bottom: 20px;
+            transition: opacity 1s;
         }
 
-        .zambalentin {
-            margin-top: 15px;
-            font-weight: bold;
-            font-size: 1.3rem;
-            color: var(--heart-red);
-            text-shadow: 0 0 10px var(--heart-red);
+        /* Feliz San Valentín (Script MT Bold style) */
+        .valentine-title {
+            font-family: 'Great Vibes', cursive; /* Similar a Script MT Bold */
+            font-size: 2.5rem;
+            color: #ff4d6d;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+            margin-top: 10px;
             opacity: 0;
+            transform: scale(0.5);
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .show-valentine {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Alerta de Broma */
+        .joke-alert {
+            margin-top: 25px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            color: #ff3333;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 5px;
+            opacity: 0;
+            border: 1px solid red;
         }
 
         /* Lluvia de pétalos */
@@ -98,75 +130,118 @@
             z-index: 5;
             animation: fall linear forwards;
         }
-
         @keyframes fall {
-            to { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div id="hearts-container"></div>
+    <div id="bg-hearts"></div>
 
-    <div class="glass-card">
-        <div class="main-icon">🌸</div>
+    <div class="glass-card" id="card">
+        <div class="sakura-icon">🌸</div>
         <div id="writer"></div>
+        
         <div id="sig" class="signature">
-            De: mi.<br>Para: tu.
+            De: mi.<br>
+            Para: tu.
         </div>
-        <div id="zam" class="zambalentin">¡jaja Feliz Zambalentin! 💖✨</div>
+
+        <div id="val-text" class="valentine-title">¡Feliz San Valentín!</div>
+        
+        <div id="joke-box" class="joke-alert"></div>
     </div>
 
     <script>
-        // Crear corazones de fondo
-        const container = document.getElementById('hearts-container');
-        for (let i = 0; i < 20; i++) {
-            const h = document.createElement('div');
-            h.className = 'bg-heart';
-            h.innerHTML = '❤';
-            h.style.left = Math.random() * 100 + 'vw';
-            h.style.top = Math.random() * 100 + 'vh';
-            h.style.fontSize = (Math.random() * 30 + 10) + 'px';
-            h.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
-            h.style.animationDelay = Math.random() * 5 + 's';
-            container.appendChild(h);
+        // --- 1. FONDO DE CORAZONES ASÍNCRONOS ---
+        const bgContainer = document.getElementById('bg-hearts');
+        for(let i=0; i<30; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'bg-heart';
+            heart.innerHTML = Math.random() > 0.5 ? '❤' : '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            // Tiempos aleatorios para que se vea asíncrono
+            heart.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            heart.style.setProperty('--delay', (Math.random() * 5) + 's');
+            bgContainer.appendChild(heart);
         }
 
-        // Mensaje con tu frase exacta
-        const text = "A veces el cuidado de mi mundo depende de los cuidados más silenciosos, cuidaría cada parte de ese mundo para que no pierda su brillo, sin importar lo que me pase a mi. Tú eres ese mundo, y si notas que intento hacer tu mundo más ligero, no es para buscar un lugar en el, sino para que nunca dudes del valor que tienes para mi.";
+        // --- 2. TEXTO MECANOGRAFÍA ---
+        const text = "A veces el cuidado de mi mundo depende de los cuidados más silenciosos, cuidaría cada parte de ese mundo para que no pierda su brillo, sin importar lo que me pase a mi. Tu eres ese mundo, y si notas que intento hacer tu mundo más ligero, no es para buscar un lugar en él, sino para que nunca dudes del valor que tienes para mi.";
         
-        let index = 0;
-        const target = document.getElementById("writer");
-
+        const writerBox = document.getElementById("writer");
+        let i = 0;
+        
         function typeWriter() {
-            if (index < text.length) {
-                target.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 55);
+            if (i < text.length) {
+                writerBox.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50); // Velocidad de escritura
             } else {
-                // Aparecer firma y saludo al final
-                document.getElementById("sig").style.opacity = "1";
-                setTimeout(() => {
-                    document.getElementById("zam").style.opacity = "1";
-                    document.getElementById("zam").style.animation = "floating 3s infinite ease-in-out";
-                }, 1000);
+                // Termina de escribir, lanzamos la secuencia final
+                setTimeout(showSignature, 1000);
             }
         }
 
+        function showSignature() {
+            document.getElementById('sig').style.opacity = '1';
+            setTimeout(showValentine, 1500);
+        }
+
+        function showValentine() {
+            const valText = document.getElementById('val-text');
+            valText.classList.add('show-valentine');
+            // Lanzamos confeti/pétalos extra
+            for(let k=0; k<10; k++) setTimeout(createPetal, k*200);
+            
+            // Iniciar la broma después de que lean el Feliz San Valentín
+            setTimeout(startJoke, 3000);
+        }
+
+        // --- 3. LA BROMA DEL RESETEO ---
+        function startJoke() {
+            const jokeBox = document.getElementById('joke-box');
+            const card = document.getElementById('card');
+            jokeBox.style.opacity = '1';
+            card.style.borderColor = 'red'; // Poner borde rojo para asustar un poco
+            
+            let count = 3;
+            
+            const countdown = setInterval(() => {
+                if(count > 0) {
+                    jokeBox.innerHTML = `⚠️ ADVERTENCIA: Exceso de cursilería detectado.<br>El dispositivo se reiniciará en ${count}...`;
+                    count--;
+                } else {
+                    clearInterval(countdown);
+                    jokeBox.innerHTML = "0...<br>¡Es broma! jajaja 🤣<br>(No se va a apagar)";
+                    jokeBox.style.color = "#00ff00"; // Verde de 'todo bien'
+                    jokeBox.style.borderColor = "#00ff00";
+                    card.style.borderColor = 'rgba(255, 51, 102, 0.3)'; // Vuelve al color original
+                }
+            }, 1000);
+        }
+
+        // --- 4. LLUVIA DE PÉTALOS ---
         function createPetal() {
             const petal = document.createElement('div');
             petal.className = 'petal';
-            const items = ['🌸', '💮', '✨'];
+            const items = ['🌸', '✨', '🤍', '💗'];
             petal.innerHTML = items[Math.floor(Math.random() * items.length)];
             petal.style.left = Math.random() * 100 + 'vw';
             petal.style.fontSize = (Math.random() * 15 + 10) + 'px';
-            petal.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
             document.body.appendChild(petal);
-            setTimeout(() => petal.remove(), 8000);
+            setTimeout(() => petal.remove(), 7000);
         }
-
         setInterval(createPetal, 400);
-        setTimeout(typeWriter, 1500);
+
+        // Iniciar todo
+        window.onload = () => {
+            setTimeout(typeWriter, 1000);
+        };
     </script>
 </body>
 </html>
