@@ -2,96 +2,119 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Personita Especial 💖</title>
     <style>
+        :root {
+            --pink-light: #ffb3c1;
+            --pink-med: #ff758f;
+            --pink-dark: #c9184a;
+            --letter-love: 350px;
+        }
+
         body {
-            background-color: #ff85a1;
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            background: #000; /* Fondo oscuro para que resalte el neón */
             overflow: hidden;
             font-family: 'Arial', sans-serif;
         }
 
-        .container {
+        /* Fondo animado de burbujas rosas */
+        .bg-blobs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #450920 0%, #000 100%);
+            z-index: -1;
+        }
+
+        /* La tarjeta principal - Estilo de tu imagen */
+        .San_Valentin {
             position: relative;
-            width: 300px;
-            height: 400px;
-            background: #fff0f3;
+            width: 90%;
+            max-width: 400px;
+            height: var(--letter-love);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--pink-med);
             border-radius: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            justify-content: center;
+            box-shadow: 0 0 30px var(--pink-dark);
+            z-index: 10;
         }
 
-        /* Tronco del árbol */
-        .trunk {
+        /* Animación del Árbol */
+        .tree-image {
+            width: 250px;
+            filter: drop-shadow(0 0 10px var(--pink-light));
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        h1 {
+            color: white;
+            text-shadow: 0 0 10px var(--pink-med);
+            font-size: 1.8rem;
+            margin-top: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Lluvia de corazones */
+        .heart-particle {
             position: absolute;
-            bottom: 80px;
-            width: 10px;
-            height: 100px;
-            background: #5d4037;
-            border-radius: 5px;
+            top: -10%;
+            color: var(--pink-med);
+            font-size: 1.5rem;
+            user-select: none;
+            animation: fall linear forwards;
         }
 
-        /* Rama del árbol */
-        .branch {
-            position: absolute;
-            background: #5d4037;
-            border-radius: 5px;
-            transform-origin: bottom center;
-        }
-
-        /* Animación de los corazones */
-        @keyframes bloom {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .heart {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #ff4d6d;
-            transform: rotate(45deg);
-            animation: bloom 2s ease-out forwards;
-        }
-
-        .heart::before, .heart::after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #ff4d6d;
-            border-radius: 50%;
-        }
-
-        .heart::before { left: -8px; }
-        .heart::after { top: -8px; }
-
-        .message {
-            margin-top: 320px;
-            color: #c9184a;
-            font-weight: bold;
-            font-size: 1.2rem;
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="trunk"></div>
-    <div class="heart" style="bottom: 180px; left: 140px; animation-delay: 0.5s; background: #ff758f;"></div>
-    <div class="heart" style="bottom: 210px; left: 120px; animation-delay: 0.8s;"></div>
-    <div class="heart" style="bottom: 230px; left: 155px; animation-delay: 1.2s; background: #ffb3c1;"></div>
-    <div class="heart" style="bottom: 200px; left: 170px; animation-delay: 1.5s;"></div>
-    <div class="heart" style="bottom: 250px; left: 140px; animation-delay: 1.8s;"></div>
-    <div class="heart" style="bottom: 220px; left: 100px; animation-delay: 2s; background: #ff758f;"></div>
-    
-    <div class="message">¡Feliz San Valentín!</div>
-</div>
+    <div class="bg-blobs"></div>
 
+    <div class="San_Valentin">
+        <img src="https://www.pngarts.com/files/12/Love-Tree-PNG-Image.png" class="tree-image" alt="Love Tree">
+        <h1>Te Amo Mucho ❤️</h1>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️'; // Puedes alternar entre 💖, 🌸, 💕
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Crea un corazón cada 200 milisegundos
+        setInterval(createHeart, 200);
+    </script>
 </body>
 </html>
