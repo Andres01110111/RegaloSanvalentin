@@ -2,50 +2,96 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Para Ti</title>
     <style>
         body {
-            background: radial-gradient(circle, #ff4d94, #ff0066);
+            background-color: #ff85a1;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            font-family: 'Arial', sans-serif;
         }
 
-        /* La clase de tu imagen */
-        .San_Valentin {
-            position: absolute;
-            width: 90%;
-            max-width: 450px;
-            font-size: 1.5rem;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            /* Aquí usamos las propiedades de tu captura */
-            transform: translateX(0%); 
-        }
-
-        .tree-container img {
-            width: 100%;
+        .container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background: #fff0f3;
             border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        h1 {
-            font-family: 'Comic Sans MS', cursive;
-            color: #d63384;
+        /* Tronco del árbol */
+        .trunk {
+            position: absolute;
+            bottom: 80px;
+            width: 10px;
+            height: 100px;
+            background: #5d4037;
+            border-radius: 5px;
+        }
+
+        /* Rama del árbol */
+        .branch {
+            position: absolute;
+            background: #5d4037;
+            border-radius: 5px;
+            transform-origin: bottom center;
+        }
+
+        /* Animación de los corazones */
+        @keyframes bloom {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .heart {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ff4d6d;
+            transform: rotate(45deg);
+            animation: bloom 2s ease-out forwards;
+        }
+
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ff4d6d;
+            border-radius: 50%;
+        }
+
+        .heart::before { left: -8px; }
+        .heart::after { top: -8px; }
+
+        .message {
+            margin-top: 320px;
+            color: #c9184a;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-    <div class="San_Valentin">
-        <div class="tree-container">
-            <img src="https://img.freepik.com/vector-premium/arbol-forma-corazon-hojas-rojas-rosas_717440-10.jpg" alt="Árbol de Amor">
-        </div>
-        <h1>¡Te Quiero Mucho!</h1>
-    </div>
+
+<div class="container">
+    <div class="trunk"></div>
+    <div class="heart" style="bottom: 180px; left: 140px; animation-delay: 0.5s; background: #ff758f;"></div>
+    <div class="heart" style="bottom: 210px; left: 120px; animation-delay: 0.8s;"></div>
+    <div class="heart" style="bottom: 230px; left: 155px; animation-delay: 1.2s; background: #ffb3c1;"></div>
+    <div class="heart" style="bottom: 200px; left: 170px; animation-delay: 1.5s;"></div>
+    <div class="heart" style="bottom: 250px; left: 140px; animation-delay: 1.8s;"></div>
+    <div class="heart" style="bottom: 220px; left: 100px; animation-delay: 2s; background: #ff758f;"></div>
+    
+    <div class="message">¡Feliz San Valentín!</div>
+</div>
+
 </body>
 </html>
