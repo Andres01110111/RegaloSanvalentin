@@ -15,7 +15,6 @@
         body {
             margin: 0;
             padding: 0;
-            /* Fondo un poco más claro en el centro para resaltar */
             background: radial-gradient(circle at center, #2a0a15 0%, #000000 100%);
             height: 100vh;
             display: flex;
@@ -25,12 +24,12 @@
             color: white;
         }
 
-        /* Corazones de fondo (Mejorados para móvil) */
+        /* Corazones de fondo (Optimizados) */
         .bg-heart {
             position: absolute;
             color: var(--heart-red);
             opacity: 0;
-            filter: blur(1px); /* Menos blur para que se vean más nítidos */
+            filter: blur(1px);
             animation: pulse-async var(--duration) infinite ease-in-out;
             animation-delay: var(--delay);
             z-index: 1;
@@ -38,20 +37,19 @@
 
         @keyframes pulse-async {
             0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.5); opacity: 0.7; text-shadow: 0 0 25px var(--heart-red); }
+            50% { transform: scale(1.5); opacity: 0.6; text-shadow: 0 0 20px var(--heart-red); }
             100% { transform: scale(0.8); opacity: 0; }
         }
 
-        /* Tarjeta de Cristal */
+        /* Tarjeta de Cristal (Optimizada para rendimiento) */
         .glass-card {
             position: relative;
             z-index: 10;
             width: 85%;
             max-width: 480px;
             padding: 30px 20px;
-            /* Más transparencia para ver el fondo */
-            background: rgba(15, 15, 15, 0.45); 
-            backdrop-filter: blur(8px); /* Blur más suave */
+            background: rgba(15, 15, 15, 0.55); 
+            backdrop-filter: blur(5px); /* Menos blur = Más rendimiento */
             border-radius: 25px;
             border: 1px solid rgba(255, 183, 197, 0.2);
             text-align: center;
@@ -64,19 +62,19 @@
             font-size: 50px;
             margin-bottom: 10px;
             display: inline-block;
-            filter: drop-shadow(0 0 15px var(--sakura));
+            filter: drop-shadow(0 0 10px var(--sakura));
             animation: float 4s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-10px); }
         }
 
         /* Texto Principal */
         #writer {
             font-family: 'Great Vibes', cursive;
-            font-size: 1.6rem; /* Ajustado para móvil */
+            font-size: 1.6rem;
             line-height: 1.3;
             color: #fff0f5;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
@@ -139,11 +137,10 @@
             to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* AJUSTES PARA CELULAR */
+        /* Ajuste Móvil */
         @media (max-width: 600px) {
-            .bg-heart { font-size: 35px; } /* Corazones más grandes en móvil */
+            .bg-heart { font-size: 30px; }
             #writer { font-size: 1.4rem; }
-            .glass-card { width: 90%; padding: 25px 15px; }
         }
     </style>
 </head>
@@ -166,16 +163,15 @@
     </div>
 
     <script>
-        // --- 1. FONDO DE CORAZONES (AJUSTADO PARA VISIBILIDAD) ---
+        // --- 1. FONDO DE CORAZONES (REDUCIDO PARA NO LAGEAR) ---
         const bgContainer = document.getElementById('bg-hearts');
-        // Aumenté a 40 corazones para que se vean más
-        for(let i=0; i<40; i++) {
+        // Reducido de 40 a 20 para mejor rendimiento en celular
+        for(let i=0; i<20; i++) {
             const heart = document.createElement('div');
             heart.className = 'bg-heart';
             heart.innerHTML = Math.random() > 0.6 ? '❤' : '💗';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.top = Math.random() * 100 + 'vh';
-            // Tamaños más variados y grandes
             heart.style.fontSize = (Math.random() * 30 + 15) + 'px';
             heart.style.setProperty('--duration', (Math.random() * 4 + 2) + 's');
             heart.style.setProperty('--delay', (Math.random() * 5) + 's');
@@ -194,7 +190,7 @@
                 i++;
                 setTimeout(typeWriter, 55); 
             } else {
-                setTimeout(showSignature, 800); // Menos espera para la firma
+                setTimeout(showSignature, 800);
             }
         }
 
@@ -206,23 +202,23 @@
         function showValentine() {
             const valText = document.getElementById('val-text');
             valText.classList.add('show-valentine');
-            for(let k=0; k<20; k++) setTimeout(createPetal, k*100);
+            // Reducido el número de pétalos simultáneos (10 en vez de 20)
+            for(let k=0; k<10; k++) setTimeout(createPetal, k*100);
             
-            // --- AQUÍ ESTÁ EL CAMBIO DE TIEMPO (2.5 segundos) ---
+            // Aparece la broma en 2.5 segundos
             setTimeout(startJoke, 2500);
         }
 
-        // --- 3. BROMA (TIEMPO Y VISIBILIDAD MEJORADOS) ---
+        // --- 3. BROMA CON CUENTA REGRESIVA DE 5 SEGUNDOS ---
         function startJoke() {
             const jokeBox = document.getElementById('joke-box');
             const card = document.getElementById('card');
             
             jokeBox.style.opacity = '1';
-            // Efecto visual de error
             card.style.borderColor = '#ff0000'; 
-            card.style.background = 'rgba(0,0,0,0.95)'; // Casi negro total
+            card.style.background = 'rgba(0,0,0,0.95)';
 
-            let count = 3; // Cuenta regresiva rápida de 3 segundos
+            let count = 5; // AQUI ESTÁ EL 5 QUE PEDISTE
             
             const countdown = setInterval(() => {
                 if(count > 0) {
@@ -230,16 +226,16 @@
                     count--;
                 } else {
                     clearInterval(countdown);
-                    jokeBox.innerHTML = "0...<br>¡Es bromaaaaaa xD!";
+                    jokeBox.innerHTML = "0...<br>¡JKAJSAKJSA bromitaaaaa xD!";
                     jokeBox.style.color = "#44ff44";
                     jokeBox.style.borderColor = "#44ff44";
                     card.style.borderColor = 'rgba(255, 183, 197, 0.2)';
-                    card.style.background = 'rgba(15, 15, 15, 0.45)';
+                    card.style.background = 'rgba(15, 15, 15, 0.55)';
                 }
             }, 1000);
         }
 
-        // --- 4. LLUVIA ---
+        // --- 4. LLUVIA (OPTIMIZADA) ---
         function createPetal() {
             const petal = document.createElement('div');
             petal.className = 'petal';
@@ -252,7 +248,8 @@
             document.body.appendChild(petal);
             setTimeout(() => petal.remove(), 8000);
         }
-        setInterval(createPetal, 350);
+        // Intervalo aumentado de 350 a 800 para menos carga en el cel
+        setInterval(createPetal, 800);
 
         window.onload = () => {
             setTimeout(typeWriter, 1000);
