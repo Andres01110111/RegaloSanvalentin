@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Priority_High ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@300;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>Para Ti ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --sakura: #ffc2d1;
             --heart-red: #ff3366;
-            --bg-dark: #0a050a;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle at center, #150510 0%, #000000 100%);
+            background: radial-gradient(circle at center, #1a0510 0%, #000000 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Quicksand', sans-serif;
             overflow: hidden;
             color: white;
         }
@@ -57,7 +55,7 @@
             border: 1px solid rgba(255, 183, 197, 0.15);
             text-align: center;
             box-shadow: 0 0 60px rgba(255, 51, 102, 0.15);
-            transition: border-color 0.5s;
+            transition: all 0.5s ease;
         }
 
         /* Icono Sakura */
@@ -74,33 +72,33 @@
             50% { transform: translateY(-12px); }
         }
 
-        /* Texto Principal */
+        /* Texto Principal con la Tipografía Script */
         #writer {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            font-weight: 300; /* Letra fina y elegante */
-            min-height: 160px;
+            font-family: 'Great Vibes', cursive; /* Estilo Script MT Bold */
+            font-size: 1.8rem; /* Tamaño grande para que se lea bien */
+            line-height: 1.4;
+            color: #fff0f5;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            min-height: 200px;
             margin-bottom: 20px;
-            color: #f0f0f0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         /* Firma */
         .signature {
-            font-size: 1rem;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
             opacity: 0;
             color: var(--sakura);
             margin-bottom: 25px;
             transition: opacity 1.5s;
-            letter-spacing: 2px;
         }
 
-        /* Feliz San Valentín (Script MT Bold style) */
+        /* Feliz San Valentín */
         .valentine-title {
             font-family: 'Great Vibes', cursive; 
             font-size: 2.8rem;
             color: #ff4d6d;
-            text-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+            text-shadow: 0 0 15px rgba(255, 77, 109, 0.8);
             margin-top: 10px;
             opacity: 0;
             transform: scale(0.8);
@@ -112,18 +110,18 @@
             transform: scale(1);
         }
 
-        /* Alerta de Broma */
+        /* Alerta de Broma (Estilo Hacker/Sistema) */
         .joke-alert {
             margin-top: 30px;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.95rem;
-            color: #ff4444;
-            background: rgba(0,0,0,0.7);
-            padding: 12px;
+            font-family: 'Share Tech Mono', monospace; /* Letra técnica para el error */
+            font-size: 1rem;
+            color: #ff3333;
+            background: black;
+            padding: 15px;
             border-radius: 8px;
             opacity: 0;
-            border: 1px solid #ff4444;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            border: 2px solid #ff3333;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
             transition: opacity 0.5s;
         }
 
@@ -167,17 +165,14 @@
             heart.innerHTML = Math.random() > 0.6 ? '❤' : '💗';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.top = Math.random() * 100 + 'vh';
-            // Tamaños variados
             heart.style.fontSize = (Math.random() * 25 + 10) + 'px';
-            // Tiempos aleatorios
             heart.style.setProperty('--duration', (Math.random() * 4 + 3) + 's');
             heart.style.setProperty('--delay', (Math.random() * 5) + 's');
             bgContainer.appendChild(heart);
         }
 
-        // --- 2. TEXTO MECANOGRAFÍA (INDIRECTO Y SUTIL) ---
-        // Este mensaje es mucho más 'safe' pero profundo. No dice "Tú eres mi mundo", sino "Tu brillo es esencial".
-        const text = "Dicen que hay equilibrios que se mantienen en silencio. Cuidaría que tu entorno nunca pierda su luz, sin importar lo que pase con el mío. No lo hago esperando algo a cambio, ni siquiera un lugar; lo hago simplemente porque hay realidades que merecen seguir brillando tal y como son. ✨";
+        // --- 2. TEXTO MECANOGRAFÍA ---
+        const text = "Sin mucho que decir y con todo que expresar, solo quería decirte que me alegra mucho coincidir contigo y saber que, sin importar el día o la situación, aquí tienes a alguien que siempre va a valorar tu alegría y apoyarte en tus decisiones. ✨";
         
         const writerBox = document.getElementById("writer");
         let i = 0;
@@ -186,9 +181,9 @@
             if (i < text.length) {
                 writerBox.innerHTML += text.charAt(i);
                 i++;
-                setTimeout(typeWriter, 55); 
+                setTimeout(typeWriter, 60); // Un pelín más lento para la letra cursiva
             } else {
-                setTimeout(showSignature, 1200);
+                setTimeout(showSignature, 1000);
             }
         }
 
@@ -204,31 +199,31 @@
             for(let k=0; k<15; k++) setTimeout(createPetal, k*150);
             
             // Iniciar la broma 5 segundos después
-            setTimeout(startJoke, 4000);
+            setTimeout(startJoke, 5000);
         }
 
-        // --- 3. LA BROMA DEL RESETEO (5 SEGUNDOS) ---
+        // --- 3. LA BROMA MODIFICADA (5 SEGUNDOS) ---
         function startJoke() {
             const jokeBox = document.getElementById('joke-box');
             const card = document.getElementById('card');
             
             jokeBox.style.opacity = '1';
-            card.style.borderColor = '#ff4444'; // Borde rojo de alerta
-            card.style.boxShadow = '0 0 30px rgba(255, 0, 0, 0.4)';
+            card.style.borderColor = '#ff0000'; 
+            card.style.background = 'rgba(0,0,0,0.9)'; // Se oscurece la tarjeta para dar miedo
 
-            let count = 5; // TEMPORIZADOR A 5 SEGUNDOS
+            let count = 5; 
             
             const countdown = setInterval(() => {
                 if(count > 0) {
-                    jokeBox.innerHTML = `⚠️ SYSTEM OVERLOAD:<br>Reiniciando dispositivo en ${count}...`;
+                    jokeBox.innerHTML = `⚠️ ERROR CRÍTICO:<br>Nivel de cursilería excedido.<br>Formateando memoria en ${count}...`;
                     count--;
                 } else {
                     clearInterval(countdown);
-                    jokeBox.innerHTML = "0...<br>¡Es broma! jajaja 🤣<br>(No se asuste)";
-                    jokeBox.style.color = "#44ff44"; // Verde
-                    jokeBox.style.borderColor = "#44ff44";
-                    card.style.borderColor = 'rgba(255, 183, 197, 0.3)'; // Vuelve a la normalidad
-                    card.style.boxShadow = '0 0 60px rgba(255, 51, 102, 0.15)';
+                    jokeBox.innerHTML = "0...<br>¡Es broma! 😂<br>(Tu cel está a salvo)";
+                    jokeBox.style.color = "#00ff00"; // Verde
+                    jokeBox.style.borderColor = "#00ff00";
+                    card.style.borderColor = 'rgba(255, 183, 197, 0.15)'; // Vuelve a la normalidad
+                    card.style.background = 'rgba(25, 25, 25, 0.6)';
                 }
             }, 1000);
         }
